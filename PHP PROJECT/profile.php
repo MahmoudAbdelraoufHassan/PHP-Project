@@ -6,6 +6,7 @@ if (isset($_SESSION['id'])) {
   include 'User.php';
   $user = getUserById($_SESSION['id'], $conn);
 
+
   ?>
 
   <!DOCTYPE html>
@@ -43,13 +44,46 @@ if (isset($_SESSION['id'])) {
           <!-- Left links -->
           <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Dashboard</a>
+              <?php
+              if ($_SESSION['type'] == 'employer') {
+                ?>
+                <a class="nav-link" href="employer_requests.php">Requests</a>
+
+                <?php
+              } else {
+                ?>
+                <a class="nav-link" href="savedjob.php">Saved Jobs</a>
+                <?php
+              }
+              ?>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Team</a>
+              <?php
+              if ($_SESSION['type'] == 'employer') {
+                ?>
+                <a class="nav-link" href="employer.php">Home</a>
+                <?php
+              } else {
+                ?>
+                <a class="nav-link" href="applicant.php">Home</a>
+
+                <?php
+              }
+              ?>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Projects</a>
+              <?php
+              if ($_SESSION['type'] == 'employer') {
+                ?>
+                <a class="nav-link" href="jobs.php">All Jobs</a>
+                <?php
+              } else {
+                ?>
+                <a class="nav-link" href="alljobsapplicant.php">All Jobs</a>
+
+                <?php
+              }
+              ?>
             </li>
           </ul>
           <!-- Left links -->
@@ -123,7 +157,9 @@ if (isset($_SESSION['id'])) {
                 <?= $user['fname'] ?>
                 <?= $user['lname'] ?>
               </h3>
-              <h4>Front-End Developer</h4>
+              <h4>
+                <?= $user['job_title'] ?>
+              </h4>
             </div>
           </div>
           <div class="box">
@@ -135,8 +171,17 @@ if (isset($_SESSION['id'])) {
         </div>
         <div class="data">
           <h2 class="fw-bold mb-5 d-flex">Personal Information
-            <!-- <i class="fa-solid fa-building text-primary ms-auto"> -->
-            <i class="fa-solid fa-user text-primary ms-auto"></i>
+            <?php
+            if ($_SESSION['type'] == 'employer') {
+              ?>
+              <i class="fa-solid fa-building text-primary ms-auto">
+              <?php
+            } else {
+              ?>
+                <i class="fa-solid fa-user text-primary ms-auto"></i>
+              <?php
+            }
+            ?>
             </i>
           </h2>
           <form action="" method="post">
@@ -167,9 +212,10 @@ if (isset($_SESSION['id'])) {
               </div>
               <div class="col-md-6 mb-3">
                 <label for="phoneNumber" class="form-label text-black">Phone Number</label>
-                <input type="text" class="form-control p-2" id="phoneNumber" placeholder="<?= $user['gender'] ?>"
+                <input type="text" class="form-control p-2" id="phoneNumber" placeholder="<?= $user['phone_num'] ?>"
                   disabled>
               </div>
+
             </div>
           </form>
         </div>

@@ -1,4 +1,20 @@
-<!DOCTYPE html>
+<?php
+session_start();
+
+if (isset($_SESSION['id'])) {
+  include "db.php";
+  include 'User.php';
+  $userid = $_SESSION['id'];
+  $user = getUserById($_SESSION['id'], $conn);
+
+  $query = "SELECT * FROM listings as l inner join categories as c on l.category_id = c.categ_id";
+  $result = mysqli_query($conn, $query);
+
+  ?>
+
+
+
+  <!DOCTYPE html>
   <html lang="en">
 
   <head>
@@ -29,7 +45,7 @@
           <!-- Left links -->
           <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Dashboard</a>
+              <a class="nav-link" href="employer_requests.php">Requests</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="employerJob.php">My Job</a>
@@ -93,49 +109,96 @@
           </button>
         </div>
         <!-- Right elements -->
+
       </div>
       <!-- Container wrapper -->
     </nav>
     <!-- Navbar -->
     <section>
-          <div class="jobList py-5">
-              <div class="component container mb-5">
-          <h2 class="Job Listing text-black fw-bolder">Job 
-            <span class="text-primary">List</span></h2>
+      <div class="jobList py-5">
+        <div class="component container mb-5">
+          <h2 class="Job Listing text-black fw-bolder">Job
+            <span class="text-primary">List</span>
+          </h2>
         </div>
         <div class="container">
-            <div class="jobs">
-        </div>
-        <div class="filters">
-            <h4>Search Jobs</h4>
-            <div class="search">
-                <input type="text" class="input" placeholder="Search for Jobs" id="input-search">
+          <div class="jobs">
+            <?php
+
+            while ($row = mysqli_fetch_assoc($result)) {
+
+              ?>
+              <div class="box bg-white rounded-3 position-relative">
+                <div class="img bg-light rounded-3 border-1">
+                  <img src="upload/<?php echo $row['picture'] ?>" alt="">
+                </div>
+                <div class="info">
+                  <span class="text-primary">
+                    <?php echo $row['company'] ?>
+                  </span>
+                  <h4 class="fw-bold">
+                    <?php echo $row['title'] ?>
+                  </h4>
+                  <div class="details d-flex align-items-center gap-2">
+                    <span class="category bg-light-subtle p-1 px-2">
+                      <?php echo $row['ategory_name'] ?>
+                    </span>
+                    <span class="time p-1 px-2 h-100 d-block">
+                      <i class="fa-regular fa-clock text-primary"></i>
+                      <?php echo $row['time_of_work'] ?>
+                    </span>
+                  </div>
+                </div>
+                <span class="date position-absolute">
+                  <?php echo $row['created_at'] ?>
+                </span>
+                <!-- <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a> -->
+              </div>
+              <?php
+            }
+            ?>
+            <div class="filters">
+              <h4>Search Jobs</h4>
+              <div class="search">
+                <input type="text" class="input" placeholder="Search for Jobs">
                 <button>
-                    <img src="./search.png" alt="" class="btn-search">
+                  <img src="./search.png" alt="">
                 </button>
-            </div>
-            <div class="categories">
+              </div>
+              <div class="categories">
                 <h3>Categories</h3>
                 <ul class="category-list">
-                    <!-- <li  class="category-item">
-                        <img src="laptop.png" alt="" srcset="">
-                        <span>Development</span>
-                    </li> -->
+                  <li class="category-item">
+                    <img src="laptop.png" alt="" srcset="">
+                    <span>Development</span>
+                  </li>
+
+                  <li class="category-item">
+                    <img src="laptop.png" alt="" srcset="">
+                    <span>Development</span>
+                  </li>
+
+                  <li class="category-item">
+                    <img src="laptop.png" alt="" srcset="">
+                    <span>Development</span>
+                  </li>
+
+                  <li class="category-item">
+                    <img src="laptop.png" alt="" srcset="">
+                    <span>Development</span>
+                  </li>
+
                 </ul>
+              </div>
             </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div>
-      </div>
     </section>
-      <script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
-></script>
-<script src="jquery.js">
-</script>
-<script src="main.js">
-</script>
-</body>
-</html>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+  </body>
+
+  </html>
+<?php } else {
+  header("Location: login.php");
+  exit;
+} ?>

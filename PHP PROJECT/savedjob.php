@@ -44,9 +44,6 @@ if (isset($_SESSION['id'])) {
                     <!-- Left links -->
                     <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="alljobsapplicant.php">All Jobs</a>
                         </li>
                         <li class="nav-item">
@@ -146,16 +143,19 @@ if (isset($_SESSION['id'])) {
                                 <?php
                                 if ($row['status'] == '0') {
                                     ?>
-                                    <h4 class="d-flex flex-column align-items-center"> Status <span class='badge text-bg-secondary'>Under Review </span></h4>
+                                    <h4 class="d-flex flex-column align-items-center"> Status <span
+                                            class='badge text-bg-secondary'>Under Review </span></h4>
 
                                     <?php
                                 } elseif ($row['status'] == '1') {
                                     ?>
-                                    <h4 class="d-flex flex-column align-items-center"> Status <span class='badge text-bg-danger'>Rejected </span></h4>
+                                    <h4 class="d-flex flex-column align-items-center"> Status <span
+                                            class='badge text-bg-danger'>Rejected </span></h4>
                                     <?php
                                 } elseif ($row['status'] == '2') {
                                     ?>
-                                    <h4 class="d-flex flex-column align-items-center"> Status <span class='badge text-bg-success'>accepted </span></h4>
+                                    <h4 class="d-flex flex-column align-items-center"> Status <span
+                                            class='badge text-bg-success'>accepted </span></h4>
                                     <?php
                                 }
                                 ?>

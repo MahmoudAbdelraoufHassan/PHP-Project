@@ -52,7 +52,7 @@ if (isset($_SESSION['id'])) {
           <!-- Left links -->
           <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Dashboard</a>
+              <a class="nav-link" href="applicant.php">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="alljobsapplicant.php">All Jobs</a>
@@ -112,6 +112,30 @@ if (isset($_SESSION['id'])) {
         </div>
         <!-- Right elements -->
 
+        <!-- notifications  -->
+
+        <div class="container1"
+          style="width:fit-content; margin: auto ; display=flex ; flex-direction: column; gap: 40px; position: absolute; top:90px; right: 10%;  ">
+          <div class="box"
+            style="margin-bottom :15px ;background-color: white; padding: 5px 10px ; border: 1px solid blue; border-radius: 10px">
+            <p>mohamed</p>
+          </div>
+          <div class="box"
+            style="background-color: white; padding: 5px 10px ; border: 1px solid blue; border-radius: 10px">
+            <p>sedek</p>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- notifications  -->
+
+
+
+
+
       </div>
       <!-- Container wrapper -->
     </nav>
@@ -127,9 +151,8 @@ if (isset($_SESSION['id'])) {
             <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, sed quam reiciendis fugiat
               sunt ab atque quis eos autem accusantium, cumque numquam a perferendis possimus officiis saepe nam tempora
               ipsum.</p>
-            <div class="landing-search">
-              <input type="text" placeholder="Enter your job">
-              <a href=" " class="bg-primary">search</a>
+            <div class="">
+              <a class="btn btn-primary" href="alljobsapplicant.php">Browse Jobs Now!</a>
             </div>
           </div>
         </div>
@@ -169,31 +192,40 @@ if (isset($_SESSION['id'])) {
       </div>
       <div class="container">
         <?php
-          $arrOficons = ["fa-solid fa-pen-nib","fa-solid fa-music"  ,"fa-solid fa-code" ,"fa-solid fa-money-bill"
-          ,"fa-solid fa-share" ,"fa-solid fa-notes-medical" , "fa-solid fa-video" , "fa-solid fa-database"];
-         $i=0;
-          while ($row2 = mysqli_fetch_assoc($result2)) {
-            ?>
-            <div class="box">
-              <div class="icon">
-                <?php 
-                echo "<i class='$arrOficons[$i] text-primary'></i>" ;
-                ?>
-              </div>
-              <div class="content">
-                <h6>
-                  <?php echo $row2['ategory_name'] ?>
-                </h6>
-               <p>
-                <?php 
-                echo $row2["listing_count"] ." " ."open postion"?>
-               </p>
-              </div>
+        $arrOficons = [
+          "fa-solid fa-pen-nib",
+          "fa-solid fa-music",
+          "fa-solid fa-code",
+          "fa-solid fa-money-bill"
+          ,
+          "fa-solid fa-share",
+          "fa-solid fa-notes-medical",
+          "fa-solid fa-video",
+          "fa-solid fa-database"
+        ];
+        $i = 0;
+        while ($row2 = mysqli_fetch_assoc($result2)) {
+          ?>
+          <div class="box">
+            <div class="icon">
+              <?php
+              echo "<i class='$arrOficons[$i] text-primary'></i>";
+              ?>
             </div>
-  
-            <?php
-            $i++;
-          }
+            <div class="content">
+              <h6>
+                <?php echo $row2['ategory_name'] ?>
+              </h6>
+              <p>
+                <?php
+                echo $row2["listing_count"] . " " . "open postion" ?>
+              </p>
+            </div>
+          </div>
+
+          <?php
+          $i++;
+        }
         ?>
 
 
@@ -273,7 +305,8 @@ if (isset($_SESSION['id'])) {
                 </li>
                 <li class="about-item">
                   <i class="fa-solid fa-check"></i>
-                  Ready to take the next step in your career journey? Explore our job listings and create an account to get started!
+                  Ready to take the next step in your career journey? Explore our job listings and create an account to
+                  get started!
                 </li>
               </ul>
             </div>
