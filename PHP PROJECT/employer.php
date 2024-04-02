@@ -328,8 +328,16 @@ if (isset($_SESSION['id'])) {
                 <span class="time p-1 px-2 h-100 d-block">
                   <i class="fa-regular fa-clock text-primary"></i>
                   <?php echo $row['time_of_work'] ?>
-                </span>
 
+                </span>
+                <span class="time p-1 px-2 h-100 d-block">
+                  <i class="fa-solid fa-dollar-sign text-primary"></i>
+                  <?php echo $row['salary'] ?>
+                </span>
+                <span class="time p-1 px-2 h-100 d-block">
+                  <i class="fa-solid fa-location-dot text-primary"></i>
+                  <?php echo $row['address'] ?>
+                </span>
               </div>
             </div>
             <span class="date position-absolute">
@@ -373,6 +381,11 @@ if (isset($_SESSION['id'])) {
                   Meet the dedicated professionals behind Jobs who are committed to revolutionizing the job search
                   experience.
                 </li>
+                <li class="about-item">
+                  <i class="fa-solid fa-check"></i>
+                  Ready to take the next step in your career journey? Explore our job listings and create an account to
+                  get started!
+                </li>
               </ul>
             </div>
           </div>
@@ -382,7 +395,10 @@ if (isset($_SESSION['id'])) {
 
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+    <script src="jquery.js"></script>
+    <script src="date.js"></script>
     <script>
       var news = document.getElementById('news');
       var cont = document.querySelector('.container1');

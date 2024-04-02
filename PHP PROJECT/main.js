@@ -7,6 +7,7 @@ $(document).ready(function(){
             let jobHtml = '';
             if(jobs.length > 0){
               jobs.forEach(job => {
+                let createdAt = moment(job.created_at).fromNow();
                 // Generate HTML for each job
                 jobHtml += `
                 <div class="box bg-white rounded-3 position-relative">
@@ -34,7 +35,7 @@ $(document).ready(function(){
                                     </span>
                                     </div>
                         </div>
-                        <span class="date position-absolute">${job.created_at}</span>
+                        <span class="date position-absolute">${createdAt}</span>
                         <a href="#" class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a>
                     </div>
                     `;
@@ -50,9 +51,8 @@ $(document).ready(function(){
         url: "categories.php",
         method: "POST",
         success: function(data) {
-            let info = JSON.parse(data);
-            console.log(info)
-            $.each(info, (i, e) => {
+          let info = JSON.parse(data);
+          $.each(info, (i, e) => {
                 let cat = $("<li>");
                 let span = $("<span>");
                 let span2 = $("<span>");
@@ -73,11 +73,13 @@ $(document).ready(function(){
         url: 'jobLsit.php',
         method: "POST",
         data: { category: cat },
+        
         success: function(data) {
             let jobs = JSON.parse(data);
             let jobHtml = '';
             if(jobs.length > 0){
               jobs.forEach(job => {
+                let createdAt = moment(job.created_at).fromNow();
                 // Generate HTML for each job
                 jobHtml += `
                 <div class="box bg-white rounded-3 position-relative">
@@ -104,7 +106,7 @@ $(document).ready(function(){
                                     </span>
                                     </div>
                         </div>
-                        <span class="date position-absolute">${job.created_at}</span>
+                        <span class="date position-absolute">${createdAt}</span>
                         <a href="#" class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a>
                     </div>
                     `;
@@ -134,6 +136,7 @@ $(document).ready(function(){
             let jobHtml = '';
             if(jobs.length > 0){
               jobs.forEach(job => {
+                let createdAt = moment(job.created_at).fromNow();
                 jobHtml += `
                 <div class="box bg-white rounded-3 position-relative">
                         <div class="img bg-light rounded-3 border-1">
@@ -159,8 +162,8 @@ $(document).ready(function(){
                                     </span>
                                     </div>
                         </div>
-                        <span class="date position-absolute">${job.created_at}</span>
-                        <a href="#" class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a>
+                        <span class="date position-absolute">${createdAt}</span>
+                        <a href="#" class="btn  d-block align-self-center ms-auto shadow-none rounded-0 ">Apply Now</a>
                     </div>
                     `;
                     $('.jobs').html(jobHtml);
@@ -173,4 +176,5 @@ $(document).ready(function(){
                       })
             }
     })
+
 });

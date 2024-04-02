@@ -177,20 +177,13 @@ if (isset($_SESSION['id'])) {
                             <?php
                         }
                         ?>
-                        <div class="filters">
-                            <h4>Search Jobs</h4>
-                            <div class="search">
-                                <input type="text" class="input" placeholder="Search for Jobs">
-                                <button>
-                                    <img src="./search.png" alt="">
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
         </section>
-        <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+    <script src="jquery.js"></script>
+        <script src="date.js"></script>
     </body>
 
     </html>

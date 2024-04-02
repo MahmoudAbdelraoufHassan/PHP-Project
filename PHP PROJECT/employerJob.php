@@ -12,12 +12,6 @@ if (isset($_SESSION['id'])) {
     $result = mysqli_query($conn, $query);
     $resultCheck = mysqli_num_rows($result);
 
-    $current_date = date("Y-m-d");
-    $sql = "UPDATE listings SET active = 0 WHERE expire_date <= '$current_date'";
-    $result1 = $conn->query($sql);
-    $conn->close();
-
-
     ?>
 
 
@@ -143,7 +137,7 @@ if (isset($_SESSION['id'])) {
 
                             ?>
                             <div class="box bg-white rounded-3 position-relative">
-                                <div class="img bg-light rounded-3 border-1">
+                                <div class="img bg-light rounded-3 border-1 align-self-center">
                                     <img src="upload/<?php echo $row['picture'] ?>" alt="">
                                 </div>
                                 <div class="info">
@@ -161,11 +155,20 @@ if (isset($_SESSION['id'])) {
                                             <i class="fa-regular fa-clock text-primary"></i>
                                             <?php echo $row['time_of_work'] ?>
                                         </span>
+                                        <span class="time p-1 px-2 h-100 d-block">
+                                            <i class="fa-solid fa-dollar-sign text-primary"></i>
+                                            <?php echo $row['salary'] ?>
+                                        </span>
+                                        <span class="time p-1 px-2 h-100 d-block">
+                                            <i class="fa-solid fa-location-dot text-primary"></i>
+                                            <?php echo $row['address'] ?>
+                                        </span>
                                     </div>
                                     <div class="div">
                                         <?php foreach ($skills as $skill)
 
                                             echo '<span class="badge bg-primary text-light p-1 mx-2">' . $skill . '</span>';
+                                        echo '<span class="badge text-bg-light border border-primary p-1 mt-2 mx-2">' . $skill . '</span>';
                                         ?>
                                     </div>
                                 </div>
@@ -173,20 +176,29 @@ if (isset($_SESSION['id'])) {
                                     <?php echo $row['created_at'] ?>
                                 </span>
 
-                                <span>
-                                    <?php
-                                    if ($row['created_at'] <= $row['expire_date']) {
-                                        echo '<span class="badge text-bg-success p-1 mx-2">' . "Available" . '</span>';
+                                <?php
+                                if ($row['created_at'] <= $row['expire_date']) {
+                                    echo '<span class="badge text-bg-success p-1 mx-2">' . "Available" . '</span>';
 
-                                    } else {
-                                        echo '<span class="badge text-bg-danger p-1 mx-2">' . "unavailable" . '</span>';
-                                    }
-                                    ?>
+                                } else {
+                                    echo '<span class="badge text-bg-danger p-1 mx-2">' . "unavailable" . '</span>';
+                                }
+                                ?>
                                 </span>
                                 <span>
                                     <a href="close.php?id=<?php echo $row['id'] ?>" class="btn btn-red"><i
                                             class="fa-solid fa-xmark"></i></a>
                                 </span>
+                                if ($result1 === true) {
+                                echo '<span class="badge text-bg-danger p-3 mx-2 position-absolute"
+                                    style="right:20px; top:50px">' . "Expired" . '</span>';
+
+                                } else {
+                                echo '<span class="badge text-bg-success p-3 mx-2position-absolute"
+                                    style="right:20px; top:50px">' . "Active" . '</span>';
+                                }
+                                ?>
+
                                 <!-- <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a> -->
                             </div>
                         </div>
@@ -195,47 +207,17 @@ if (isset($_SESSION['id'])) {
 
                         }
                         ?>
-                    <div class="filters">
-                        <h4>Search Jobs</h4>
-                        <div class="search">
-                            <input type="text" class="input" placeholder="Search for Jobs">
-                            <button>
-                                <img src="./search.png" alt="">
-                            </button>
-                        </div>
 
-                        <!-- categories -->
-                        <div class="categories">
-                            <h3>Categories</h3>
-                            <ul class="category-list">
-                                <li class="category-item">
-                                    <img src="laptop.png" alt="" srcset="">
-                                    <span>Development</span>
-                                </li>
-
-                                <li class="category-item">
-                                    <img src="laptop.png" alt="" srcset="">
-                                    <span>Development</span>
-                                </li>
-
-                                <li class="category-item">
-                                    <img src="laptop.png" alt="" srcset="">
-                                    <span>Development</span>
-                                </li>
-
-                                <li class="category-item">
-                                    <img src="laptop.png" alt="" srcset="">
-                                    <span>Development</span>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
+                    <!-- categories -->
                 </div>
             </div>
+            </div>
         </section>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+        <script src="jquery.js"></script>
+        <script src="date.js"></script>
     </body>
 
     </html>

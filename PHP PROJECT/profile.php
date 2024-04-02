@@ -162,12 +162,6 @@ if (isset($_SESSION['id'])) {
               </h4>
             </div>
           </div>
-          <div class="box">
-            <ul>
-              <li>User Profile</li>
-              <li>History</li>
-            </ul>
-          </div>
         </div>
         <div class="data">
           <h2 class="fw-bold mb-5 d-flex">Personal Information
