@@ -123,10 +123,7 @@ if (isset($_SESSION['id'])) {
             <div class="categories">
                 <h3>Categories</h3>
                 <ul class="category-list">
-                    <!-- <li  class="category-item">
-                        <img src="laptop.png" alt="" srcset="">
-                        <span>Development</span>
-                    </li> -->
+                    
                 </ul>
             </div>
         </div>
@@ -135,14 +132,11 @@ if (isset($_SESSION['id'])) {
     <div>
       </div>
     </section>
-      <script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
-></script>
-<script src="jquery.js">
-</script>
-<script src="main.js">
-</script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+    <script src="jquery.js"></script>
+    <script src="main.js"></script>
+        <script src="date.js"></script>
 </body>
     </html>

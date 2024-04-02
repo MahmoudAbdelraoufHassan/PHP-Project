@@ -226,11 +226,18 @@ if (isset($_SESSION['id'])) {
                   <i class="fa-regular fa-clock text-primary"></i>
                   <?= $row['time_of_work'] ?>
                 </span>
-
+                <span class="time p-1 px-2 h-100 d-block">
+                                <i class="fa-solid fa-dollar-sign text-primary"></i>
+                              <?php echo $row['salary'] ?>
+                                    </span>
+                                    <span class="time p-1 px-2 h-100 d-block">
+                                    <i class="fa-solid fa-location-dot text-primary"></i>
+                                    <?php echo $row['address'] ?>
+                                    </span>
               </div>
             </div>
             <span class="date position-absolute">
-              <?= $row['created_at'] ?>
+              <?php echo $row['created_at']?>
             </span>
             <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0"
               href="app.php?id=<?php echo $row['id'] ?>">Apply Now</a>
@@ -283,8 +290,11 @@ if (isset($_SESSION['id'])) {
     </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
-  </body>
-
+    <script src="jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script src="date.js">
+      </script> 
+       </body>
   </html>
 <?php } else {
   header("Location: login.php");

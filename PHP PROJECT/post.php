@@ -17,13 +17,15 @@ if (isset($_SESSION['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="style.css" />
     <title>Application</title>
   </head>
 
   <body>
-    <div class="container">
-      <h3>New Job!</h3>
+  <div class="register ">
+<div class="container d-flex justify-content-center position-relative">
+  <div class="form  rounded-2 w-75">
+      <h4 class="fw-bold">New Job!</h4>
       <div class="row">
         <div class="col-md-12">
 
@@ -61,27 +63,21 @@ if (isset($_SESSION['id'])) {
                   $new_img_name = uniqid($company, true) . '.' . $img_ex_to_lc;
                   $img_upload_path = './upload/' . $new_img_name;
                   move_uploaded_file($tmp_name, $img_upload_path);
-
                 }
               }
             }
-
             $errors = array();
-
             if (empty($title) or empty($phone) or empty($email) or empty($address)) {
               array_push($errors, 'All fields are required');
             }
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
               array_push($errors, 'Invalid email');
             }
-
             require_once "db.php";
-
             if (count($errors) > 0) {
               foreach ($errors as $error) {
                 echo "<div class='alert alert-danger'>" . $error . "</div>";
               }
-
             } else {
               $sql = "insert into listings (user_id,title,description,category_id,time_of_work,salary,skills,company,address,phone,email,requirements,benefits,picture,expire_date) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
               $stmt = mysqli_stmt_init($conn);
@@ -95,76 +91,108 @@ if (isset($_SESSION['id'])) {
               }
             }
           }
-
-
           ?>
           <form action="post.php" method="post" enctype="multipart/form-data">
-            <div class="form-group">
+            <div class="form-group mb-2">
               <input type="text" class="form-control" name="title" placeholder="Title" />
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
               <textarea type="text" class="form-control" name="desc" placeholder="Description"></textarea>
             </div>
-            <div class="form-group">
-              <select name="category" id="">
-                <option value="choose">choose</option>
-                <option value="1">Graphic & Design</option>
-                <option value="2">Music & Audio</option>
-                <option value="3">Code & Programing</option>
-                <option value="4">Account & Finance</option>
-                <option value="5">Digital Marketing</option>
-                <option value="6">Health & Care</option>
-                <option value="7">Video & Animation</option>
-                <option value="8">Data & Science</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <select name="time" id="">
-                <option value="choose">choose</option>
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
+            <div class="row mb-2">
+  <div class="col-md-6">
+    <div class="form-group">
+      <select name="category" class="form-control">
+        <option value="choose">Category</option>
+        <option value="1">Graphic & Design</option>
+        <option value="2">Music & Audio</option>
+        <option value="3">Code & Programing</option>
+        <option value="4">Account & Finance</option>
+        <option value="5">Digital Marketing</option>
+        <option value="6">Health & Care</option>
+        <option value="7">Video & Animation</option>
+        <option value="8">Data & Science</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <select name="time" class="form-control">
+        <option value="choose">Time</option>
+        <option value="Full-time">Full-time</option>
+        <option value="Part-time">Part-time</option>
+      </select>
+    </div>
+  </div>
+</div>
 
-              </select>
-            </div>
-            <div class="form-group">
-              <input name="expireDate" type="date">
-            </div>
+<div class="form-group mb-2">
+      <input name="expireDate" type="date" class="form-control">
+    </div>
 
-            <div class="form-group">
-              <input name="salary" class="form-control" placeholder="salary" />
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="skills" placeholder="skills" />
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="company" placeholder=" company name" />
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="requirements" placeholder="requirements" />
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="address" placeholder="address" />
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="phone" placeholder="phone number" />
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-control" name="email" placeholder="email" />
-            </div>
+            <div class="row mb-2">
+  <div class="col-md-6">
+    <div class="form-group">
+      <input name="salary" class="form-control" placeholder="Salary" />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" name="skills" placeholder="Skills" />
+    </div>
+  </div>
+</div>
 
-            <div class="form-group">
-              <input type="text" class="form-control" name="benefits" placeholder="rewards" />
-            </div>
+<div class="row mb-2">
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" name="company" placeholder="Company Name" />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" name="requirements" placeholder="Requirements" />
+    </div>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" name="address" placeholder="Address" />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" name="phone" placeholder="Phone Number" />
+    </div>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="email" class="form-control" name="email" placeholder="Email" />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" name="benefits" placeholder="Rewards" />
+    </div>
+  </div>
+</div>
             <div class="form-group">
               <input type="file" class="form-control" name="picture" />
             </div>
             <div class="form-btn">
-              <input type="submit" class="btn btn-info" name="post" value="post" />
+              <input type="submit" class="reg w-100 mt-2" name="post" value="post" />
             </div>
           </form>
           <a href="employer.php">my jobs</a>
         </div>
       </div>
+    </div>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="<KEY>"
       crossorigin="anonymous"></script>
