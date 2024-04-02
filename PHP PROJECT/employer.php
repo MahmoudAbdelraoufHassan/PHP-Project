@@ -10,11 +10,14 @@ if (isset($_SESSION['id'])) {
   $query = "SELECT * FROM listings as l inner join categories as c on l.category_id = c.categ_id where user_id = $userid  limit 2";
   $result = mysqli_query($conn, $query);
 
-  $query2 = "SELECT * FROM categories ";
+  $query2 = "SELECT count(l.category_id) as listing_count, c.ategory_name 
+  FROM categories as c
+  left join listings as l on l.category_id = c.categ_id
+  group by c.ategory_name";
+
   $result2 = mysqli_query($conn, $query2);
 
   ?>
-
 
   <!DOCTYPE html>
   <html lang="en">
@@ -32,7 +35,6 @@ if (isset($_SESSION['id'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   </head>
-
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light w-100 p-3 bg-white">
@@ -179,21 +181,31 @@ if (isset($_SESSION['id'])) {
         <h2 class="Job Listing text-black fw-bolder">Popular <span class="text-primary">Categories</span></h2>
       </div>
       <div class="container">
-        <?php
+      <?php
+        $arrOficons = ["fa-solid fa-pen-nib","fa-solid fa-music"  ,"fa-solid fa-code" ,"fa-solid fa-money-bill"
+        ,"fa-solid fa-share" ,"fa-solid fa-notes-medical" , "fa-solid fa-video" , "fa-solid fa-database"];
+       $i=0;
         while ($row2 = mysqli_fetch_assoc($result2)) {
           ?>
           <div class="box">
             <div class="icon">
-              <i class="fa-solid fa-code text-primary"></i>
+              <?php 
+              echo "<i class='$arrOficons[$i] text-primary'></i>" ;
+              ?>
             </div>
             <div class="content">
               <h6>
                 <?php echo $row2['ategory_name'] ?>
               </h6>
+             <p>
+              <?php 
+              echo $row2["listing_count"] ." " ."open postion"?>
+             </p>
             </div>
           </div>
 
           <?php
+          $i++;
         }
         ?>
       </div>

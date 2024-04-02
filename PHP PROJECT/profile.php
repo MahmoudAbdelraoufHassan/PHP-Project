@@ -172,7 +172,6 @@ if (isset($_SESSION['id'])) {
               </div>
             </div>
           </form>
-          <a href="edit.php?id=<?php echo $user['id'] ?>">update</a>
         </div>
       </div>
     </div>

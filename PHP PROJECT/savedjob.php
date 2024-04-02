@@ -13,8 +13,6 @@ if (isset($_SESSION['id'])) {
 
     ?>
 
-
-
     <!DOCTYPE html>
     <html lang="en">
 
@@ -125,13 +123,11 @@ if (isset($_SESSION['id'])) {
                     </h2>
                 </div>
                 <div class="container">
-                    <div class="jobs d-flex justify-content-space-between">
+                    <div class="jobs d-flex gap-3">
                         <?php
-
                         while ($row = mysqli_fetch_assoc($result)) {
-
                             ?>
-                            <div class="box bg-white rounded-3 position-relative">
+                            <div class="box bg-white rounded-3 position-relative saved justify-content-between">
 
                                 <div class="info">
                                     <h4 class="text-primary">
@@ -147,28 +143,22 @@ if (isset($_SESSION['id'])) {
 
                                     </div>
                                 </div>
-                                <div>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-
                                 <?php
                                 if ($row['status'] == '0') {
                                     ?>
-                                    <h4> Status <span class='badge text-bg-secondary'>Under Review </span></h4>
+                                    <h4 class="d-flex flex-column align-items-center"> Status <span class='badge text-bg-secondary'>Under Review </span></h4>
 
                                     <?php
                                 } elseif ($row['status'] == '1') {
                                     ?>
-                                    <h4> Status <span class='badge text-bg-danger'>Rejected </span></h4>
+                                    <h4 class="d-flex flex-column align-items-center"> Status <span class='badge text-bg-danger'>Rejected </span></h4>
                                     <?php
                                 } elseif ($row['status'] == '2') {
                                     ?>
-                                    <h4> Status <span class='badge text-bg-success'>accepted </span></h4>
+                                    <h4 class="d-flex flex-column align-items-center"> Status <span class='badge text-bg-success'>accepted </span></h4>
                                     <?php
                                 }
                                 ?>
-
-
                                 <div class="info">
                                     <h4 class="text-primary">
                                         <?php echo $row['title'] ?>
@@ -180,7 +170,6 @@ if (isset($_SESSION['id'])) {
                                         <span class="category bg-light-subtle p-1 px-2">
                                             <?php echo $row['email'] ?>
                                         </span>
-
                                     </div>
                                 </div>
                                 <!-- <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a> -->

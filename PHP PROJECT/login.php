@@ -5,20 +5,40 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" href="main.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet" />
+
+	<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
-	<div class="container">
-		<?php
+	<div class="register">
+
+		<div class="container mt-5 d-flex justify-content-center position-relative">
+		<div class="form  rounded-2 mx-auto">
+			<form action="login.php" method="post">
+				<h3 class="log">Login</h3>
+			<div class="form-group  mb-4">
+				<input type="email" placeholder="Enter Email" name="email" class="form-control p-2">
+			</div>
+			<div class="form-group  mb-4">
+				<input type="password" placeholder="Enter Password" name="pass" class="form-control p-2">
+			</div>
+			<div class="form-btn  mb-4">
+				<input type="submit" value="Login" name="login" class="reg w-100">
+			</div>
+		</form>
+		<a href="register.php" class="login">Regiter</a>
+	</div>
+			<?php
 		if (isset($_POST['login'])) {
 			$email = $_POST['email'];
 			$password = $_POST['pass'];
-
+			
 			require_once "db.php";
 			$sql = "select * from users where email = '$email'";
 			$result = mysqli_query($conn, $sql);
@@ -34,9 +54,8 @@
 						$_SESSION['picture'] = $user['picture'];
 						$_SESSION['location'] = $user['city'];
 						$_SESSION['date'] = $user['birth_date'];
-						$_SESSION['type'] = $user['type'];
 						die();
-
+						
 					} else {
 						header("Location: applicant.php");
 						session_start();
@@ -46,32 +65,25 @@
 						$_SESSION['picture'] = $user['picture'];
 						$_SESSION['location'] = $user['city'];
 						$_SESSION['date'] = $user['birth_date'];
-						$_SESSION['type'] = $user['type'];
 						die();
 
 					}
 				} else {
-					echo "<div class='alert alert-dander'>" . "Password doesn't match " . "</div>";
+					echo "<div class='er'>";
+					echo "<div class='alert alert-danger'>". "Password doesn't match " . "</div>";
+					echo "</div>";
 				}
 
 			} else {
+				echo "<div class='er'>";
 				echo "<div class='alert alert-danger'>" . "Email doesn't match" . "</div>";
+				echo "</div>";
 			}
 		}
 		?>
-		<form action="login.php" method="post">
-			<div class="form-group">
-				<input type="email" placeholder="Enter Email PLZ" name="email" class="form-control">
-			</div>
-			<div class="form-group">
-				<input type="password" placeholder="Enter Password PLZ" name="pass" class="form-control">
-			</div>
-			<div class="form-btn">
-				<input type="submit" value="Login" name="login" class="btn btn-primary">
-			</div>
-		</form>
-		<a href="register.php" class="btn btn-primary">Sign Up</a>
-	</div>
+		
+</div>
+</div>
 
 </body>
 

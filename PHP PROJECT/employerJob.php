@@ -40,7 +40,7 @@ if (isset($_SESSION['id'])) {
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light w-100 p-3 bg-white position-fixed top-0">
+        <nav class="navbar navbar-expand-lg navbar-light w-100 p-3 bg-white">
             <!-- Container wrapper -->
             <div class="container">
                 <!-- Toggle button -->
@@ -175,17 +175,13 @@ if (isset($_SESSION['id'])) {
 
                                 <span>
                                     <?php
-                                    if ($row['created_at'] <= $row['expire_date']) {
-                                        echo '<span class="badge text-bg-success p-1 mx-2">' . "Available" . '</span>';
+                                    if ($result1 === true) {
+                                        echo '<span class="badge text-bg-danger p-1 mx-2">' . "Expired" . '</span>';
 
                                     } else {
-                                        echo '<span class="badge text-bg-danger p-1 mx-2">' . "unavailable" . '</span>';
+                                        echo '<span class="badge text-bg-success p-1 mx-2">' . "Active" . '</span>';
                                     }
                                     ?>
-                                </span>
-                                <span>
-                                    <a href="close.php?id=<?php echo $row['id'] ?>" class="btn btn-red"><i
-                                            class="fa-solid fa-xmark"></i></a>
                                 </span>
                                 <!-- <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a> -->
                             </div>

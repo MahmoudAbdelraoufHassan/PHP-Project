@@ -31,12 +31,12 @@ if (isset($_SESSION['id'])) {
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light w-100 p-3 bg-white position-fixed top-0">
+        <nav class="navbar navbar-expand-lg navbar-light w-100 p-3 bg-white">
             <!-- Container wrapper -->
             <div class="container">
                 <!-- Toggle button -->
                 <a class="navbar-brand mt-2 mt-lg-0 fw-bold" href="#">
-                    LOGO
+                    JOBS
                 </a>
 
                 <!-- Collapsible wrapper -->
@@ -60,11 +60,6 @@ if (isset($_SESSION['id'])) {
 
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
-                    <!-- Icon -->
-                    <!-- <a class="link-secondary me-3" href="#">
-              <i class="fas fa-shopping-cart"></i>
-            </a> -->
-
                     <!-- Notifications -->
                     <div class="dropdown">
                         <a data-mdb-dropdown-init class="link-secondary me-3 dropdown-toggle hidden-arrow" href="#"
@@ -128,7 +123,6 @@ if (isset($_SESSION['id'])) {
                         <?php
 
                         while ($row = mysqli_fetch_assoc($result)) {
-
                             ?>
                             <div class="box bg-white rounded-3 position-relative">
                                 <div class="info">
@@ -141,10 +135,10 @@ if (isset($_SESSION['id'])) {
                                     <span>
                                         <?php echo $row['applicant_phone'] ?>
                                     </span>
-                                    <span class="fw-bold">
+                                    <div class="fw-bold">
                                         <a download href="upload/<?= $row['cv'] ?>" class="btn">DownLoad CV</a>
-                                    </span>
-                                    <div class="details d-flex align-items-center gap-2">
+                                    </div>
+                                    <div class="details d-flex align-items-center gap-2 top-0 text-align-center">
                                         <?php
                                         if ($row['status'] == '0') {
                                             ?>
@@ -162,11 +156,11 @@ if (isset($_SESSION['id'])) {
                                         ?>
                                     </div>
                                 </div>
-                                <span class="date position-absolute">
+                                <span class="date position-absolute d-flex flex-column gap-2" style="top:5px;">
                                     <a href="reject.php?id=<?php echo $row['applicant_id']; ?>&id_job=<?php echo $row['listing_id']; ?>"
-                                        class="btn" style="background-color: red ; color:white ; ">Reject</a>
+                                        class="btn bg-danger" style="background-color: red ; color:white ; ">Reject</a>
                                     <a href="accept.php?id=<?php echo $row['applicant_id']; ?>&id_job=<?php echo $row['listing_id']; ?>"
-                                        class="btn" style="background-color: green ; color:white ; ">Accept</a>
+                                        class="btn bg-success">Accept</a>
                                     <a href="under_review.php?id=<?php echo $row['applicant_id']; ?>&id_job=<?php echo $row['listing_id']; ?>"
                                         class="btn" style="background-color: green ; color:white ; ">Under Review</a>
                                 </span>

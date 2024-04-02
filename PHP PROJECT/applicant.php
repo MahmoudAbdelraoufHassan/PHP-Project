@@ -11,11 +11,12 @@ if (isset($_SESSION['id'])) {
   $query = "SELECT * FROM listings as l inner join categories as c on l.category_id = c.categ_id limit 2";
   $result = mysqli_query($conn, $query);
 
-  $query2 = "SELECT * FROM categories ";
+  $query2 = "SELECT count(l.category_id) as listing_count, c.ategory_name 
+  FROM categories as c
+  left join listings as l on l.category_id = c.categ_id
+  group by c.ategory_name ";
   $result2 = mysqli_query($conn, $query2);
 
-  $sql = "SELECT * FROM masseges ";
-  $result3 = mysqli_query($conn, $sql);
 
   ?>
   <!DOCTYPE html>
@@ -33,22 +34,6 @@ if (isset($_SESSION['id'])) {
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <style>
-      .massege {
-        position: absolute;
-        background-color: white;
-        border: 1px solid black;
-        border-radius: 20px;
-        top: 20%;
-        right: 50%;
-        padding: 25px;
-        opacity: 0;
-      }
-
-      .active {
-        opacity: 1;
-      }
-    </style>
   </head>
 
   <body>
@@ -82,11 +67,6 @@ if (isset($_SESSION['id'])) {
 
         <!-- Right elements -->
         <div class="d-flex align-items-center">
-          <!-- Icon -->
-          <!-- <a class="link-secondary me-3" href="#">
-          <i class="fas fa-shopping-cart"></i>
-        </a> -->
-
           <!-- Notifications -->
           <div class="dropdown">
             <a data-mdb-dropdown-init class="link-secondary me-3 dropdown-toggle hidden-arrow" href="#"
@@ -96,7 +76,7 @@ if (isset($_SESSION['id'])) {
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li>
-                <a class="dropdown-item" href="#" id="msg">Some news</a>
+                <a class="dropdown-item" href="#">Some news</a>
               </li>
               <li>
                 <a class="dropdown-item" href="#">Another news</a>
@@ -106,51 +86,31 @@ if (isset($_SESSION['id'])) {
               </li>
             </ul>
           </div>
-          <div class="massege">
-            <?php
-            while ($row = mysqli_fetch_array($result3)) {
-              ?>
-              <div class="massege-content">
-                <div class="massege-icon">
-                  <i class="fas fa-bell"></i>
-                </div>
-                <div class="massege-text">
-                  <h5>notification</h5>
-                  <p>
-                    <?php echo $row['msg'] ?>
-                  </p>
-                </div>
-              </div>
-              <?php
-            }
-            ?>
+          <!-- Avatar -->
+          <div class="dropdown">
+            <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#"
+              id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+              <img src="upload/<?= $user['picture'] ?>" class="rounded-circle" height="35"
+                alt="Black and White Portrait of a Man" loading="lazy" />
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end rounded-0 effect" aria-labelledby="navbarDropdownMenuAvatar">
+              <li>
+                <a class="dropdown-item  rounded-0" href="profile.php">My profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item  rounded-0" href="#">Settings</a>
+              </li>
+              <li>
+                <a class="dropdown-item  rounded-0" href="Logout.php">Logout</a>
+              </li>
+            </ul>
           </div>
+          <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
         </div>
-        <!-- Avatar -->
-        <div class="dropdown">
-          <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#"
-            id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-            <img src="upload/<?= $user['picture'] ?>" class="rounded-circle" height="35"
-              alt="Black and White Portrait of a Man" loading="lazy" />
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end rounded-0 effect" aria-labelledby="navbarDropdownMenuAvatar">
-            <li>
-              <a class="dropdown-item  rounded-0" href="profile.php">My profile</a>
-            </li>
-            <li>
-              <a class="dropdown-item  rounded-0" href="#">Settings</a>
-            </li>
-            <li>
-              <a class="dropdown-item  rounded-0" href="Logout.php">Logout</a>
-            </li>
-          </ul>
-        </div>
-        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-      <!-- Right elements -->
+        <!-- Right elements -->
 
       </div>
       <!-- Container wrapper -->
@@ -209,21 +169,31 @@ if (isset($_SESSION['id'])) {
       </div>
       <div class="container">
         <?php
-        while ($row2 = mysqli_fetch_assoc($result2)) {
-          ?>
-          <div class="box">
-            <div class="icon">
-              <i class="fa-solid fa-code text-primary"></i>
+          $arrOficons = ["fa-solid fa-pen-nib","fa-solid fa-music"  ,"fa-solid fa-code" ,"fa-solid fa-money-bill"
+          ,"fa-solid fa-share" ,"fa-solid fa-notes-medical" , "fa-solid fa-video" , "fa-solid fa-database"];
+         $i=0;
+          while ($row2 = mysqli_fetch_assoc($result2)) {
+            ?>
+            <div class="box">
+              <div class="icon">
+                <?php 
+                echo "<i class='$arrOficons[$i] text-primary'></i>" ;
+                ?>
+              </div>
+              <div class="content">
+                <h6>
+                  <?php echo $row2['ategory_name'] ?>
+                </h6>
+               <p>
+                <?php 
+                echo $row2["listing_count"] ." " ."open postion"?>
+               </p>
+              </div>
             </div>
-            <div class="content">
-              <h6>
-                <?php echo $row2['ategory_name'] ?>
-              </h6>
-            </div>
-          </div>
-
-          <?php
-        }
+  
+            <?php
+            $i++;
+          }
         ?>
 
 
@@ -262,22 +232,8 @@ if (isset($_SESSION['id'])) {
             <span class="date position-absolute">
               <?= $row['created_at'] ?>
             </span>
-            <?php
-
-            if ($row['created_at'] <= $row['expire_date']) {
-              ?>
-              <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0"
-                href="app.php?id=<?php echo $row['id'] ?>">Apply Now</a>
-
-              <?php
-            } else {
-              ?>
-              <span class="badge text-bg-danger p-1 mx-2"> this job unavailable </span>
-
-              <?php
-            }
-            ?>
-
+            <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0"
+              href="app.php?id=<?php echo $row['id'] ?>">Apply Now</a>
           </div>
           <?php
         }
@@ -315,6 +271,10 @@ if (isset($_SESSION['id'])) {
                   Meet the dedicated professionals behind Jobs who are committed to revolutionizing the job search
                   experience.
                 </li>
+                <li class="about-item">
+                  <i class="fa-solid fa-check"></i>
+                  Ready to take the next step in your career journey? Explore our job listings and create an account to get started!
+                </li>
               </ul>
             </div>
           </div>
@@ -323,15 +283,6 @@ if (isset($_SESSION['id'])) {
     </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
-    <script>
-      var msg = document.getElementById("msg");
-      var div = document.querySelector(".massege");
-
-      msg.addEventListener('click', function (e) {
-        div.classList.add("active");
-      })
-
-    </script>
   </body>
 
   </html>
