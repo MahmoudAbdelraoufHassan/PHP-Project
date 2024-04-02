@@ -8,6 +8,14 @@ margin: 0;
 box-sizing: border-box;
 font-family: "Poppins", sans-serif;
 }
+
+.massege{
+ display: none;
+
+}
+.activate{
+    opacity: 1;
+}
 html {
     scroll-behavior: smooth;
 }
