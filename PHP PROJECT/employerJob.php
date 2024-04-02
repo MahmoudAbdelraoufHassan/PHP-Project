@@ -167,8 +167,7 @@ if (isset($_SESSION['id'])) {
                                     <div class="div">
                                         <?php foreach ($skills as $skill)
 
-                                            echo '<span class="badge bg-primary text-light p-1 mx-2">' . $skill . '</span>';
-                                        echo '<span class="badge text-bg-light border border-primary p-1 mt-2 mx-2">' . $skill . '</span>';
+                                            echo '<span class="badge text-bg-light border border-primary p-1 mt-2 mx-2">' . $skill . '</span>';
                                         ?>
                                     </div>
                                 </div>
@@ -177,36 +176,23 @@ if (isset($_SESSION['id'])) {
                                 </span>
 
                                 <?php
-                                if ($row['created_at'] <= $row['expire_date']) {
-                                    echo '<span class="badge text-bg-success p-1 mx-2">' . "Available" . '</span>';
+                                if ($result === true) {
+                                    echo '<span class="badge text-bg-danger p-3 mx-2 position-absolute" style="right:20px; top:50px">' . "Expired" . '</span>';
 
                                 } else {
-                                    echo '<span class="badge text-bg-danger p-1 mx-2">' . "unavailable" . '</span>';
-                                }
-                                ?>
-                                </span>
-                                <span>
-                                    <a href="close.php?id=<?php echo $row['id'] ?>" class="btn btn-red"><i
-                                            class="fa-solid fa-xmark"></i></a>
-                                </span>
-                                if ($result1 === true) {
-                                echo '<span class="badge text-bg-danger p-3 mx-2 position-absolute"
-                                    style="right:20px; top:50px">' . "Expired" . '</span>';
-
-                                } else {
-                                echo '<span class="badge text-bg-success p-3 mx-2position-absolute"
-                                    style="right:20px; top:50px">' . "Active" . '</span>';
+                                    echo '<span class="badge text-bg-success p-3 mx-2 position-absolute" style="right:20px; top:50px">' . "Active" . '</span>';
                                 }
                                 ?>
 
                                 <!-- <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a> -->
                             </div>
-                        </div>
-
-                        <?php
+                            <?php
 
                         }
                         ?>
+                    </div>
+
+
 
                     <!-- categories -->
                 </div>

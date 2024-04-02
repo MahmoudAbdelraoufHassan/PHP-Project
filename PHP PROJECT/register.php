@@ -36,6 +36,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group mb-4">
+                        <input type="text" class="form-control" name="jobtitle" placeholder="job title">
+                    </div>
                     <div class="form-group mt-4 mb-4">
 
                         <textarea type="text" class="form-control " name="aboutme" placeholder="About Me"></textarea>
@@ -44,10 +47,7 @@
                         <input type="email" class="form-control" name="email" placeholder="email">
                     </div>
                     <div class="form-group mb-4">
-                        <input type="text" class="form-control" name="phone_num" placeholder="your phone">
-                    </div>
-                    <div class="form-group mb-4">
-                        <input type="text" class="form-control" name="job_title" placeholder="job_title">
+                        <input type="text" class="form-control" name="phonenum" placeholder="phone">
                     </div>
 
                     <div class="form-group mb-4">
@@ -107,8 +107,8 @@
                 $type = $_POST['type'];
                 $gender = $_POST['gender'];
                 $age = $_POST['date'];
-                $title = $_POST['job_title'];
-                $phone = $_POST['phone_num'];
+                $phone = $_POST['phonenum'];
+                $title = $_POST['jobtitle'];
 
                 $pass_hash = password_hash($password, PASSWORD_DEFAULT);
                 if (isset($_FILES['pp']['name']) and !empty($_FILES['pp']['name'])) {
@@ -135,7 +135,7 @@
 
                 $errors = array();
 
-                if (empty($fname) or empty($lname) or empty($email) or empty($phone) or empty($title) or empty($password) or empty($city) or empty($type) or empty($gender) or empty($age)) {
+                if (empty($fname) or empty($lname) or empty($email) or empty($password) or empty($title) or empty($phone) or empty($city) or empty($type) or empty($gender) or empty($age)) {
                     array_push($errors, 'All fields are required');
                 }
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -161,11 +161,11 @@
                     echo "</div>";
 
                 } else {
-                    $sql = "insert into users (fname,lname,email,password,user_type,city,gender,birth_date,picture,phone_num , job_title) values (?,?,?,?,?,?,?,?,?,?,?)";
+                    $sql = "insert into users (fname,lname,email,password,user_type,city,gender,birth_date,picture, phone_num , job_title) values (?,?,?,?,?,?,?,?,?,?,?)";
                     $stmt = mysqli_stmt_init($conn);
                     $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
                     if ($prepareStmt) {
-                        mysqli_stmt_bind_param($stmt, "sssssssssss", $fname, $lname, $email, $pass_hash, $type, $city, $gender, $age, $new_img_name, $phone, $title);
+                        mysqli_stmt_bind_param($stmt, "sssssssssss", $fname, $lname, $email, $pass_hash, $type, $city, $gender, $age, $new_img_name, $title, $phone);
                         mysqli_stmt_execute($stmt);
                         echo "<div class='alert alert-success'>" . 'You are registered successfully.' . "</div>";
                     } else {

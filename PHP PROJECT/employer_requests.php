@@ -45,8 +45,7 @@ if (isset($_SESSION['id'])) {
                     <!-- Left links -->
                     <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-
-                            <a class="nav-link" href="jobs.php">All Job</a>
+                            <a class="nav-link" href="jobs.php">All Jobs</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="employerJob.php">My Job</a>
@@ -175,9 +174,10 @@ if (isset($_SESSION['id'])) {
         </section>
         <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
-    <script src="jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+        <script src="jquery.js"></script>
         <script src="date.js"></script>
     </body>
 

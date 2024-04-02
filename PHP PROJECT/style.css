@@ -295,12 +295,8 @@ section .container {
     display: flex;
     gap: 40px;
 }
-section .filterz{
-
-flex: 1;
-}
 section .jobs {
-    flex: 3;
+    flex: 1;
 }
 section .search {
 box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -470,7 +466,7 @@ color: #9fa4ad;
     }
 .register{
     padding-top: 50px;
-    min-height: 150vh;
+    min-height: 200vh;
     background-color: #4070f4;
 }
 .register .container {

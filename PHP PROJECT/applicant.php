@@ -58,7 +58,7 @@ if (isset($_SESSION['id'])) {
               <a class="nav-link" href="alljobsapplicant.php">All Jobs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="savedjob.php">saved jobs</a>
+              <a class="nav-link" href="savedjob.php">My Requests</a>
             </li>
           </ul>
           <!-- Left links -->
@@ -112,30 +112,6 @@ if (isset($_SESSION['id'])) {
         </div>
         <!-- Right elements -->
 
-        <!-- notifications  -->
-
-        <div class="container1"
-          style="width:fit-content; margin: auto ; display=flex ; flex-direction: column; gap: 40px; position: absolute; top:90px; right: 10%;  ">
-          <div class="box"
-            style="margin-bottom :15px ;background-color: white; padding: 5px 10px ; border: 1px solid blue; border-radius: 10px">
-            <p>mohamed</p>
-          </div>
-          <div class="box"
-            style="background-color: white; padding: 5px 10px ; border: 1px solid blue; border-radius: 10px">
-            <p>sedek</p>
-          </div>
-        </div>
-
-
-
-
-
-        <!-- notifications  -->
-
-
-
-
-
       </div>
       <!-- Container wrapper -->
     </nav>
@@ -151,8 +127,9 @@ if (isset($_SESSION['id'])) {
             <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, sed quam reiciendis fugiat
               sunt ab atque quis eos autem accusantium, cumque numquam a perferendis possimus officiis saepe nam tempora
               ipsum.</p>
-            <div class="">
-              <a class="btn btn-primary" href="alljobsapplicant.php">Browse Jobs Now!</a>
+            <div class="" style="width:50%;">
+
+              <a href="alljobsapplicant.php" class="btn btn-primary">Browse All Jobs!!</a>
             </div>
           </div>
         </div>
@@ -259,20 +236,31 @@ if (isset($_SESSION['id'])) {
                   <?= $row['time_of_work'] ?>
                 </span>
                 <span class="time p-1 px-2 h-100 d-block">
-                                <i class="fa-solid fa-dollar-sign text-primary"></i>
-                              <?php echo $row['salary'] ?>
-                                    </span>
-                                    <span class="time p-1 px-2 h-100 d-block">
-                                    <i class="fa-solid fa-location-dot text-primary"></i>
-                                    <?php echo $row['address'] ?>
-                                    </span>
+                  <i class="fa-solid fa-dollar-sign text-primary"></i>
+                  <?php echo $row['salary'] ?>
+                </span>
+                <span class="time p-1 px-2 h-100 d-block">
+                  <i class="fa-solid fa-location-dot text-primary"></i>
+                  <?php echo $row['address'] ?>
+                </span>
               </div>
             </div>
             <span class="date position-absolute">
-              <?php echo $row['created_at']?>
+              <?php echo $row['created_at'] ?>
             </span>
-            <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0"
-              href="app.php?id=<?php echo $row['id'] ?>">Apply Now</a>
+            <?php
+            if ($row['created_at'] <= $row['expire_date']) {
+              ?>
+              <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0"
+                href="app.php?id=<?php echo $row['id'] ?>">Apply Now</a>
+              <?php
+            } else {
+              ?>
+              <h5><span class="badge text-bg-danger">Expired</span></h5>
+
+              <?php
+            }
+            ?>
           </div>
           <?php
         }
@@ -325,9 +313,10 @@ if (isset($_SESSION['id'])) {
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
     <script src="jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-        <script src="date.js">
-      </script> 
-       </body>
+    <script src="date.js">
+    </script>
+  </body>
+
   </html>
 <?php } else {
   header("Location: login.php");

@@ -36,7 +36,7 @@ $(document).ready(function(){
                                     </div>
                         </div>
                         <span class="date position-absolute">${createdAt}</span>
-                        <a href="#" class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a>
+                        <a href="app.php?id=${job.id}" class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a>
                     </div>
                     `;
                     $('.jobs').html(jobHtml);

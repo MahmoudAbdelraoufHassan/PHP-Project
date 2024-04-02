@@ -17,10 +17,6 @@ if (isset($_SESSION['id'])) {
 
   $result2 = mysqli_query($conn, $query2);
 
-
-  $sql = "SELECT * FROM masseges ";
-  $res = mysqli_query($conn, $sql);
-
   ?>
 
   <!DOCTYPE html>
@@ -38,51 +34,7 @@ if (isset($_SESSION['id'])) {
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <style>
-      .container1 {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        flex-flow: column;
-        gap: 20px;
-        margin: auto;
-        width: 200px;
-        position: absolute;
-        top: 80px;
-        right: 250px;
-        z-index: 999;
-        opacity: 0;
-      }
-
-      .active {
-        opacity: 1;
-      }
-
-      .box1 {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 400px;
-        height: fit-content;
-        border: 1px solid rgba(0, 0, 0, 0);
-        background-color: white;
-        gap: 20px;
-        margin: auto;
-        padding-left: 10px;
-        border-radius: 10px;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-      }
-
-      .btn-1 {
-        text-decoration: none;
-        color: white;
-        background-color: cadetblue;
-        padding: 5px 10px;
-        border-radius: 5px;
-      }
-    </style>
   </head>
-
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light w-100 p-3 bg-white">
@@ -123,10 +75,20 @@ if (isset($_SESSION['id'])) {
           <div class="dropdown">
             <a data-mdb-dropdown-init class="link-secondary me-3 dropdown-toggle hidden-arrow" href="#"
               id="navbarDropdownMenuLink" role="button" aria-expanded="false">
-              <i class="fas fa-bell" id="news"></i>
+              <i class="fas fa-bell"></i>
               <span class="badge rounded-pill badge-notification bg-danger">1</span>
             </a>
-
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="#">Some news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+            </ul>
           </div>
           <!-- Avatar -->
           <div class="dropdown">
@@ -157,47 +119,6 @@ if (isset($_SESSION['id'])) {
       </div>
       <!-- Container wrapper -->
     </nav>
-
-    <div class="container1">
-      <?php
-      while ($r = mysqli_fetch_assoc($res)) {
-        if ($res->num_rows > 0) {
-          ?>
-          <div class="box1">
-
-            <div>
-              <i class="fa-solid fa-bell"></i>
-            </div>
-            <div id="my">
-              <p>
-                <?php echo $r['msg'] ?>
-              </p>
-            </div>
-            <div>
-              <a class="btn-1" href="closenotification.php?id=<?php echo $r['msg_id'] ?>">OK</a>
-            </div>
-          </div>
-        <?php } else {
-          ?>
-          <div class="box1">
-
-            <div>
-              <i class="fa-solid fa-bell"></i>
-            </div>
-            <div id="my">
-              <p>
-                <?php echo "No Notifications Now" ?>
-              </p>
-            </div>
-
-          </div>
-
-          <?php
-        }
-      }
-      ?>
-    </div>
-
     <!-- Navbar -->
     <!-- MDB -->
     <div class="emp-landing">
@@ -260,35 +181,26 @@ if (isset($_SESSION['id'])) {
         <h2 class="Job Listing text-black fw-bolder">Popular <span class="text-primary">Categories</span></h2>
       </div>
       <div class="container">
-        <?php
-        $arrOficons = [
-          "fa-solid fa-pen-nib",
-          "fa-solid fa-music",
-          "fa-solid fa-code",
-          "fa-solid fa-money-bill"
-          ,
-          "fa-solid fa-share",
-          "fa-solid fa-notes-medical",
-          "fa-solid fa-video",
-          "fa-solid fa-database"
-        ];
-        $i = 0;
+      <?php
+        $arrOficons = ["fa-solid fa-pen-nib","fa-solid fa-music"  ,"fa-solid fa-code" ,"fa-solid fa-money-bill"
+        ,"fa-solid fa-share" ,"fa-solid fa-notes-medical" , "fa-solid fa-video" , "fa-solid fa-database"];
+       $i=0;
         while ($row2 = mysqli_fetch_assoc($result2)) {
           ?>
           <div class="box">
             <div class="icon">
-              <?php
-              echo "<i class='$arrOficons[$i] text-primary'></i>";
+              <?php 
+              echo "<i class='$arrOficons[$i] text-primary'></i>" ;
               ?>
             </div>
             <div class="content">
               <h6>
                 <?php echo $row2['ategory_name'] ?>
               </h6>
-              <p>
-                <?php
-                echo $row2["listing_count"] . " " . "open postion" ?>
-              </p>
+             <p>
+              <?php 
+              echo $row2["listing_count"] ." " ."open postion"?>
+             </p>
             </div>
           </div>
 
@@ -331,13 +243,13 @@ if (isset($_SESSION['id'])) {
 
                 </span>
                 <span class="time p-1 px-2 h-100 d-block">
-                  <i class="fa-solid fa-dollar-sign text-primary"></i>
-                  <?php echo $row['salary'] ?>
-                </span>
-                <span class="time p-1 px-2 h-100 d-block">
-                  <i class="fa-solid fa-location-dot text-primary"></i>
-                  <?php echo $row['address'] ?>
-                </span>
+                                <i class="fa-solid fa-dollar-sign text-primary"></i>
+                              <?php echo $row['salary'] ?>
+                                    </span>
+                                    <span class="time p-1 px-2 h-100 d-block">
+                                    <i class="fa-solid fa-location-dot text-primary"></i>
+                                    <?php echo $row['address'] ?>
+                                    </span>
               </div>
             </div>
             <span class="date position-absolute">
@@ -383,8 +295,7 @@ if (isset($_SESSION['id'])) {
                 </li>
                 <li class="about-item">
                   <i class="fa-solid fa-check"></i>
-                  Ready to take the next step in your career journey? Explore our job listings and create an account to
-                  get started!
+                  Ready to take the next step in your career journey? Explore our job listings and create an account to get started!
                 </li>
               </ul>
             </div>
@@ -394,19 +305,10 @@ if (isset($_SESSION['id'])) {
     </div>
 
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
     <script src="jquery.js"></script>
-    <script src="date.js"></script>
-    <script>
-      var news = document.getElementById('news');
-      var cont = document.querySelector('.container1');
-      news.addEventListener('click', function () {
-
-        cont.classList.add('active');
-      }); 
-    </script>
+        <script src="date.js"></script>
   </body>
 
   </html>
