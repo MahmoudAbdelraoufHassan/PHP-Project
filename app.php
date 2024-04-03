@@ -25,10 +25,8 @@ if (isset($_SESSION['id']) && isset($_GET['id'])) {
   <title>Application</title>
 </head>
 
-<body>
-
-
-  <div class="register">
+<body class="register">
+  <div>
     <div class="container d-flex justify-content-center position-relative">
       <div class="form  rounded-2">
         <h4 class="fw-bolder mb-3">Apply Job Now</h4>

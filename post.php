@@ -21,8 +21,8 @@ if (isset($_SESSION['id'])) {
     <title>Application</title>
   </head>
 
-  <body>
-  <div class="register ">
+  <body class="register">
+  <div>
 <div class="container d-flex justify-content-center position-relative">
   <div class="form  rounded-2 w-75">
       <h4 class="fw-bold">New Job!</h4>

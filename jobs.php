@@ -80,7 +80,7 @@ if (isset($_SESSION['id'])) {
                 <div class="dropdown">
                     <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#"
                         id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-                        <img src="upload/<?= $user['picture'] ?>" class="rounded-circle" height="35"
+                        <img src="upload/<?= $user['picture'] == null ? "user.png": $user['picture'] ?>" class="rounded-circle" height="35"
                             alt="Black and White Portrait of a Man" loading="lazy" />
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end rounded-0 effect"

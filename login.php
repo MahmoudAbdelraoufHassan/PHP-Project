@@ -15,8 +15,8 @@
 
 </head>
 
-<body>
-	<div class="register">
+<body class="register">
+		<div>
 
 		<div class="container mt-5 d-flex justify-content-center position-relative">
 			<div class="form  rounded-2 mx-auto">

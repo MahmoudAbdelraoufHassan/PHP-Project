@@ -7,13 +7,10 @@ if (isset($_SESSION['id'])) {
     $userid = $_SESSION['id'];
     $user = getUserById($_SESSION['id'], $conn);
 
-    require_once "db.php";
-    $query = "SELECT * FROM listings as l inner join categories as c on l.category_id = c.categ_id where user_id = $userid ";
+    $query = "SELECT * from applications as a inner join listings as l on a.listing_id = l.id  where a.organizer_id  = $userid ";
     $result = mysqli_query($conn, $query);
-    $resultCheck = mysqli_num_rows($result);
 
     ?>
-
 
 
 
@@ -39,7 +36,7 @@ if (isset($_SESSION['id'])) {
             <div class="container">
                 <!-- Toggle button -->
                 <a class="navbar-brand mt-2 mt-lg-0 fw-bold" href="#">
-                    LOGO
+                    JOBS
                 </a>
 
                 <!-- Collapsible wrapper -->
@@ -48,14 +45,13 @@ if (isset($_SESSION['id'])) {
                     <!-- Left links -->
                     <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="employer_requests.php">Requests</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="jobs.php">All Jobs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="employer.php
-                            ">Home</a>
+                            <a class="nav-link" href="employerJob.php">My Job</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="employer.php">Home</a>
                         </li>
                     </ul>
                     <!-- Left links -->
@@ -64,11 +60,6 @@ if (isset($_SESSION['id'])) {
 
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
-                    <!-- Icon -->
-                    <!-- <a class="link-secondary me-3" href="#">
-              <i class="fas fa-shopping-cart"></i>
-            </a> -->
-
                     <!-- Notifications -->
                     <div class="dropdown">
                         <a data-mdb-dropdown-init class="link-secondary me-3 dropdown-toggle hidden-arrow" href="#"
@@ -92,16 +83,13 @@ if (isset($_SESSION['id'])) {
                     <div class="dropdown">
                         <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#"
                             id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-                            <img src="upload/<?= $user['picture'] ?>" class="rounded-circle" height="35"
+                            <img src="upload/<?= $user['picture'] == null ? "user.png": $user['picture'] ?>" class="rounded-circle" height="35"
                                 alt="Black and White Portrait of a Man" loading="lazy" />
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end rounded-0 effect"
                             aria-labelledby="navbarDropdownMenuAvatar">
                             <li>
                                 <a class="dropdown-item  rounded-0" href="profile.php">My profile</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item  rounded-0" href="#">Settings</a>
                             </li>
                             <li>
                                 <a class="dropdown-item  rounded-0" href="logout.php">Logout</a>
@@ -123,7 +111,7 @@ if (isset($_SESSION['id'])) {
         <section>
             <div class="jobList py-5">
                 <div class="component container mb-5">
-                    <h2 class="Job Listing text-black fw-bolder">My Job
+                    <h2 class="Job Listing text-black fw-bolder">Requests
                         <span class="text-primary">List</span>
                     </h2>
                 </div>
@@ -132,73 +120,132 @@ if (isset($_SESSION['id'])) {
                         <?php
 
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $URL = "id1=" . $row['id'] . "&id2=" . $row['user_id'];
-                            $skills = explode(',', $row['skills']);
-
                             ?>
                             <div class="box bg-white rounded-3 position-relative">
-                                <div class="img bg-light rounded-3 border-1 align-self-center">
-                                    <img src="upload/<?php echo $row['picture'] ?>" alt="">
-                                </div>
                                 <div class="info">
-                                    <span class="text-primary">
-                                        <?php echo $row['company'] ?>
-                                    </span>
-                                    <h4 class="fw-bold">
-                                        <?php echo $row['title'] ?>
+                                    <h4 class="text-primary">
+                                        <?php echo $row['applicant_name'] ?>
                                     </h4>
-                                    <div class="details d-flex align-items-center gap-2">
-                                        <span class="category bg-light-subtle p-1 px-2">
-                                            <?php echo $row['ategory_name'] ?>
-                                        </span>
-                                        <span class="time p-1 px-2 h-100 d-block">
-                                            <i class="fa-regular fa-clock text-primary"></i>
-                                            <?php echo $row['time_of_work'] ?>
-                                        </span>
-                                        <span class="time p-1 px-2 h-100 d-block">
-                                            <i class="fa-solid fa-dollar-sign text-primary"></i>
-                                            <?php echo $row['salary'] ?>
-                                        </span>
-                                        <span class="time p-1 px-2 h-100 d-block">
-                                            <i class="fa-solid fa-location-dot text-primary"></i>
-                                            <?php echo $row['address'] ?>
-                                        </span>
+                                    <h6>
+                                        <?php echo $row['applicant_email'] ?>
+                                    </h6>
+                                    <span>
+                                        <?php echo $row['applicant_phone'] ?>
+                                    </span>
+                                    <div class="fw-bold">
+                                        <a download href="upload/<?= $row['cv'] ?>" class="btn">DownLoad CV</a>
                                     </div>
-                                    <div class="div">
-                                        <?php foreach ($skills as $skill)
-
-                                            echo '<span class="badge text-bg-light border border-primary p-1 mt-2 mx-2">' . $skill . '</span>';
+                                    <div class="details d-flex align-items-center gap-2 top-0 text-align-center">
+                                        <?php
+                                        if ($row['status'] == '0') {
+                                            ?>
+                                            <h4> <span class="badge text-bg-secondary">Under Review</span></h4>
+                                            <?php
+                                        } else if ($row['status'] == '1') {
+                                            ?>
+                                                <h4><span class="badge text-bg-danger">Rejected</span></h4>
+                                            <?php
+                                        } else {
+                                            ?>
+                                                <h4><span class="badge text-bg-success">accepted</span></h4>
+                                            <?php
+                                        }
                                         ?>
                                     </div>
                                 </div>
-                                <span class="date position-absolute">
-                                    <?php echo $row['created_at'] ?>
+                                <span class="date position-absolute d-flex flex-column gap-2" style="top:5px;">
+                                    <a href="reject.php?id=<?php echo $row['applicant_id']; ?>&id_job=<?php echo $row['listing_id']; ?>"
+                                        class="btn bg-danger" style="background-color: red ; color:white ; ">Reject</a>
+                                    <a href="accept.php?id=<?php echo $row['applicant_id']; ?>&id_job=<?php echo $row['listing_id']; ?>"
+                                        class="btn bg-success">Accept</a>
+                                    <a href="under_review.php?id=<?php echo $row['applicant_id']; ?>&id_job=<?php echo $row['listing_id']; ?>"
+                                        class="btn" style="background-color: green ; color:white ; ">Under Review</a>
                                 </span>
-
-                                <?php
-                                if ($result === true) {
-                                    echo '<span class="badge text-bg-danger p-3 mx-2 position-absolute" style="right:20px; top:50px">' . "Expired" . '</span>';
-
-                                } else {
-                                    echo '<span class="badge text-bg-success p-3 mx-2 position-absolute" style="right:20px; top:50px">' . "Active" . '</span>';
-                                }
-                                ?>
-
                                 <!-- <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a> -->
                             </div>
                             <?php
-
                         }
                         ?>
                     </div>
-
-
-
-                    <!-- categories -->
                 </div>
-            </div>
-            </div>
         </section>
+        <footer class="text-center bg-dark">
+  <!-- Grid container -->
+  <div class="container pt-4">
+    <!-- Section: Social media -->
+    <div class="mb-4">
+      <!-- Facebook -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+
+      <!-- Twitter -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-linkedin"></i
+      ></a>
+      <!-- Github -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-github"></i
+      ></a>
+    </div>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3 text-light" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2020 Copyright:
+    <a class="text-primary" href="">ITI</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>

@@ -34,7 +34,7 @@ if (isset($_SESSION['id'])) {
       <div class="container">
         <!-- Toggle button -->
         <a class="navbar-brand mt-2 mt-lg-0 fw-bold" href="#">
-          LOGO
+          JOBS
         </a>
 
         <!-- Collapsible wrapper -->
@@ -135,15 +135,12 @@ if (isset($_SESSION['id'])) {
           <div class="dropdown">
             <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#"
               id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-              <img src="upload/<?= $user['picture'] ?>" class="rounded-circle" height="35"
+              <img src="upload/<?= $user['picture'] == null ? "user.png": $user['picture'] ?>" class="rounded-circle" height="35"
                 alt="Black and White Portrait of a Man" loading="lazy" />
             </a>
             <ul class="dropdown-menu dropdown-menu-end rounded-0 effect" aria-labelledby="navbarDropdownMenuAvatar">
               <li>
                 <a class="dropdown-item  rounded-0" href="profile.php">My profile</a>
-              </li>
-              <li>
-                <a class="dropdown-item  rounded-0" href="#">Settings</a>
               </li>
               <li>
                 <a class="dropdown-item  rounded-0" href="logout.php">Logout</a>
@@ -165,7 +162,7 @@ if (isset($_SESSION['id'])) {
         <div class="card">
           <div class="box">
             <div class="image">
-              <img src="upload/<?= $user['picture'] ?>" alt="">
+              <img src="upload/<?= $user['picture'] == null ? "user.png": $user['picture'] ?>" alt="">
             </div>
             <div class="profile-info">
               <h3>
@@ -230,6 +227,81 @@ if (isset($_SESSION['id'])) {
         </div>
       </div>
     </div>
+    <footer class="text-center bg-dark">
+  <!-- Grid container -->
+  <div class="container pt-4">
+    <!-- Section: Social media -->
+    <div class="mb-4">
+      <!-- Facebook -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+
+      <!-- Twitter -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-linkedin"></i
+      ></a>
+      <!-- Github -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-github"></i
+      ></a>
+    </div>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3 text-light" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2020 Copyright:
+    <a class="text-primary" href="">ITI</a>
+  </div>
+  <!-- Copyright -->
+</footer>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
   </body>
 

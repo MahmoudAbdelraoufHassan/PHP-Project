@@ -5,20 +5,20 @@ if (isset($_SESSION['id'])) {
   include "db.php";
   include 'User.php';
   $userid = $_SESSION['id'];
+
   $user = getUserById($_SESSION['id'], $conn);
 
-  $query = "SELECT * FROM listings as l inner join categories as c on l.category_id = c.categ_id where user_id = $userid  limit 2";
+  $query = "SELECT * FROM listings as l inner join categories as c on l.category_id = c.categ_id limit 2";
   $result = mysqli_query($conn, $query);
 
   $query2 = "SELECT count(l.category_id) as listing_count, c.ategory_name 
   FROM categories as c
   left join listings as l on l.category_id = c.categ_id
-  group by c.ategory_name";
-
+  group by c.ategory_name ";
   $result2 = mysqli_query($conn, $query2);
 
-  ?>
 
+  ?>
   <!DOCTYPE html>
   <html lang="en">
 
@@ -35,6 +35,7 @@ if (isset($_SESSION['id'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   </head>
+
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light w-100 p-3 bg-white">
@@ -42,7 +43,7 @@ if (isset($_SESSION['id'])) {
       <div class="container">
         <!-- Toggle button -->
         <a class="navbar-brand mt-2 mt-lg-0 fw-bold" href="#">
-          LOGO
+          JOBS
         </a>
 
         <!-- Collapsible wrapper -->
@@ -51,13 +52,13 @@ if (isset($_SESSION['id'])) {
           <!-- Left links -->
           <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="employer_requests.php">Requests</a>
+              <a class="nav-link" href="applicant.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="jobs.php">All Jobs</a>
+              <a class="nav-link" href="alljobsapplicant.php">All Jobs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="employerJob.php">My Jobs</a>
+              <a class="nav-link" href="savedjob.php">My Requests</a>
             </li>
           </ul>
           <!-- Left links -->
@@ -66,11 +67,6 @@ if (isset($_SESSION['id'])) {
 
         <!-- Right elements -->
         <div class="d-flex align-items-center">
-          <!-- Icon -->
-          <!-- <a class="link-secondary me-3" href="#">
-          <i class="fas fa-shopping-cart"></i>
-        </a> -->
-
           <!-- Notifications -->
           <div class="dropdown">
             <a data-mdb-dropdown-init class="link-secondary me-3 dropdown-toggle hidden-arrow" href="#"
@@ -94,7 +90,7 @@ if (isset($_SESSION['id'])) {
           <div class="dropdown">
             <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#"
               id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-              <img src="upload/<?= $user['picture'] ?>" class="rounded-circle" height="35"
+              <img src="upload/<?= $user['picture'] == null ? "user.png": $user['picture'] ?>" class="rounded-circle" height="35"
                 alt="Black and White Portrait of a Man" loading="lazy" />
             </a>
             <ul class="dropdown-menu dropdown-menu-end rounded-0 effect" aria-labelledby="navbarDropdownMenuAvatar">
@@ -102,10 +98,7 @@ if (isset($_SESSION['id'])) {
                 <a class="dropdown-item  rounded-0" href="profile.php">My profile</a>
               </li>
               <li>
-                <a class="dropdown-item  rounded-0" href="#">Settings</a>
-              </li>
-              <li>
-                <a class="dropdown-item  rounded-0" href="logout.php">Logout</a>
+                <a class="dropdown-item  rounded-0" href="Logout.php">Logout</a>
               </li>
             </ul>
           </div>
@@ -121,33 +114,22 @@ if (isset($_SESSION['id'])) {
     </nav>
     <!-- Navbar -->
     <!-- MDB -->
-    <div class="emp-landing">
-      <div class="overlay"></div>
-      <div class="heading">
-        <div class="text">
-          <h1 class="mx-auto mb-2">Join Leading Companies in Finding <span class="text-primary">Exceptional Talent</span>
-          </h1>
-          <p>Welcome to Jobs, where connecting with top talent is simplified. Post your job openings, explore our diverse
-            candidate pool, and build your dream team with ease</p>
-          <div class="btns d-flex gap-2 align-items-center justify-content-center">
-            <a href="" class="bg-light text-primary py-3 px-5 rounded-2">Get Start</i></a>
-            <a href="post.php" class="text-light bg-primary py-3 px-5 rounded-2">Post Job <i
-                class="fi fi-ts-arrow-small-right"></i> <i class="fa-solid fa-arrow-right"></i></a>
+    <div class="landing">
+      <div class="container">
+        <div class="landing_head">
+          <div class="text">
+            <h1 class="mb-4 fw-bold">Discover Your Next
+              <span class="text-primary">Career Move</span>
+            </h1>
+            <p class="mb-4">Discover your dream job on our platform. With a vast array of opportunities and user-friendly features, finding the perfect fit has never been simpler. Join us today and take the first step toward your career goals!</p>
+            <div class="" style="width:50%;">
 
+              <a href="alljobsapplicant.php" class="btn btn-primary">Browse All Jobs!!</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div id="carouselExampleSlidesOnly" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
-        <div class="carousel-inner">
-          <div class="carousel-item active h-100">
-            <img src="slide1.jpg" class="d-block w-100 c" alt="Wild Landscape" />
-          </div>
-          <div class="carousel-item">
-            <img src="slide2.jpg" class="d-block w-100 c" alt="Camera" />
-          </div>
-          <div class="carousel-item">
-            <img src="slide3.jpg" class="d-block w-100 c" alt="Exotic Fruits" />
-          </div>
+        <div class="landing_image">
+          <img src="./OC3QZ20.jpg" alt="" srcset="">
         </div>
       </div>
     </div>
@@ -181,26 +163,35 @@ if (isset($_SESSION['id'])) {
         <h2 class="Job Listing text-black fw-bolder">Popular <span class="text-primary">Categories</span></h2>
       </div>
       <div class="container">
-      <?php
-        $arrOficons = ["fa-solid fa-pen-nib","fa-solid fa-music"  ,"fa-solid fa-code" ,"fa-solid fa-money-bill"
-        ,"fa-solid fa-share" ,"fa-solid fa-notes-medical" , "fa-solid fa-video" , "fa-solid fa-database"];
-       $i=0;
+        <?php
+        $arrOficons = [
+          "fa-solid fa-pen-nib",
+          "fa-solid fa-music",
+          "fa-solid fa-code",
+          "fa-solid fa-money-bill"
+          ,
+          "fa-solid fa-share",
+          "fa-solid fa-notes-medical",
+          "fa-solid fa-video",
+          "fa-solid fa-database"
+        ];
+        $i = 0;
         while ($row2 = mysqli_fetch_assoc($result2)) {
           ?>
           <div class="box">
             <div class="icon">
-              <?php 
-              echo "<i class='$arrOficons[$i] text-primary'></i>" ;
+              <?php
+              echo "<i class='$arrOficons[$i] text-primary'></i>";
               ?>
             </div>
             <div class="content">
               <h6>
                 <?php echo $row2['ategory_name'] ?>
               </h6>
-             <p>
-              <?php 
-              echo $row2["listing_count"] ." " ."open postion"?>
-             </p>
+              <p>
+                <?php
+                echo $row2["listing_count"] . " " . "open postion" ?>
+              </p>
             </div>
           </div>
 
@@ -208,9 +199,9 @@ if (isset($_SESSION['id'])) {
           $i++;
         }
         ?>
-      </div>
 
-    </div>
+
+      </div>
     </div>
     <div class="jobList py-5">
       <div class="component text-center mb-5">
@@ -218,51 +209,60 @@ if (isset($_SESSION['id'])) {
       </div>
       <div class="container">
         <?php
-
         while ($row = mysqli_fetch_assoc($result)) {
-
           ?>
           <div class="box bg-white rounded-3 position-relative">
             <div class="img bg-light rounded-3 border-1">
-              <img src="upload/<?php echo $row['picture'] ?>" alt="">
+              <img src="upload/<?= $row['picture'] ?>" alt="">
             </div>
             <div class="info">
               <span class="text-primary">
-                <?php echo $row['company'] ?>
+                <?php $row['company'] ?>
               </span>
               <h4 class="fw-bold">
-                <?php echo $row['title'] ?>
+                <?= $row['title'] ?>
               </h4>
               <div class="details d-flex align-items-center gap-2">
                 <span class="category bg-light-subtle p-1 px-2">
-                  <?php echo $row['ategory_name'] ?>
+                  <?= $row['ategory_name'] ?>
                 </span>
                 <span class="time p-1 px-2 h-100 d-block">
                   <i class="fa-regular fa-clock text-primary"></i>
-                  <?php echo $row['time_of_work'] ?>
-
+                  <?= $row['time_of_work'] ?>
                 </span>
                 <span class="time p-1 px-2 h-100 d-block">
-                                <i class="fa-solid fa-dollar-sign text-primary"></i>
-                              <?php echo $row['salary'] ?>
-                                    </span>
-                                    <span class="time p-1 px-2 h-100 d-block">
-                                    <i class="fa-solid fa-location-dot text-primary"></i>
-                                    <?php echo $row['address'] ?>
-                                    </span>
+                  <i class="fa-solid fa-dollar-sign text-primary"></i>
+                  <?php echo $row['salary'] ?>
+                </span>
+                <span class="time p-1 px-2 h-100 d-block">
+                  <i class="fa-solid fa-location-dot text-primary"></i>
+                  <?php echo $row['address'] ?>
+                </span>
               </div>
             </div>
             <span class="date position-absolute">
               <?php echo $row['created_at'] ?>
             </span>
-            <!-- <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0">Apply Now</a> -->
-          </div>
+            <?php
+            if ($row['created_at'] <= $row['expire_date']) {
+              ?>
+              <a class="btn  d-block align-self-center ms-auto shadow-none rounded-0"
+                href="app.php?id=<?php echo $row['id'] ?>">Apply Now</a>
+              <?php
+            } else {
+              ?>
+              <h5><span class="badge text-bg-danger">Expired</span></h5>
 
+              <?php
+            }
+            ?>
+          </div>
           <?php
         }
         ?>
         <div class="d-flex justify-content-center mt-3">
-          <a class="bg-primary rounded-0 shadow-none text-light px-4 py-2 mx-auto" href="jobs.php">Show More</a>
+          <a class="bg-primary rounded-0 shadow-none text-light px-4 py-2 mx-auto" href="alljobsapplicant.php">Show
+            More</a>
         </div>
       </div>
     </div>
@@ -295,7 +295,8 @@ if (isset($_SESSION['id'])) {
                 </li>
                 <li class="about-item">
                   <i class="fa-solid fa-check"></i>
-                  Ready to take the next step in your career journey? Explore our job listings and create an account to get started!
+                  Ready to take the next step in your career journey? Explore our job listings and create an account to
+                  get started!
                 </li>
               </ul>
             </div>
@@ -303,12 +304,87 @@ if (isset($_SESSION['id'])) {
         </div>
       </div>
     </div>
+    <footer class="text-center bg-dark">
+  <!-- Grid container -->
+  <div class="container pt-4">
+    <!-- Section: Social media -->
+    <div class="mb-4">
+      <!-- Facebook -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
 
+      <!-- Twitter -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-twitter"></i
+      ></a>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+      <!-- Google -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-linkedin"></i
+      ></a>
+      <!-- Github -->
+      <a
+        data-mdb-ripple-init
+        class="btn-floating btn-lg text-white m-1"
+        href="#!"
+        role="button"
+        data-mdb-ripple-color="dark"
+        ><i class="fab fa-github"></i
+      ></a>
+    </div>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3 text-light" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2020 Copyright:
+    <a class="text-primary" href="">ITI</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
     <script src="jquery.js"></script>
-        <script src="date.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="date.js">
+    </script>
   </body>
 
   </html>

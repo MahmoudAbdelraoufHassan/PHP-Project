@@ -465,8 +465,7 @@ color: #9fa4ad;
         left: 0;
     }
 .register{
-    padding-top: 50px;
-    min-height: 200vh;
+    padding-top: 20px;
     background-color: #4070f4;
 }
 .register .container {
@@ -519,4 +518,7 @@ h3.log::before{
 .active {
     color: black !important;
     transition: 0.3s;
+}
+.search {
+    display: flex;
 }

@@ -14,17 +14,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <div class="register">
-
+<body class="register">
+    <div>
         <div class="container d-flex justify-content-center position-relative">
-
             <div class="form  rounded-2">
-
                 <form action="register.php" method="post" enctype="multipart/form-data">
-
                     <h3 class="">Registeration</h3>
-                    <div class="row">
+                    <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group ">
                                 <input type="text" class="form-control" name="fname" placeholder="First Name">
@@ -40,7 +36,6 @@
                         <input type="text" class="form-control" name="jobtitle" placeholder="job title">
                     </div>
                     <div class="form-group mt-4 mb-4">
-
                         <textarea type="text" class="form-control " name="aboutme" placeholder="About Me"></textarea>
                     </div>
                     <div class="form-group mb-4">
@@ -165,7 +160,7 @@
                     $stmt = mysqli_stmt_init($conn);
                     $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
                     if ($prepareStmt) {
-                        mysqli_stmt_bind_param($stmt, "sssssssssss", $fname, $lname, $email, $pass_hash, $type, $city, $gender, $age, $new_img_name, $title, $phone);
+                        mysqli_stmt_bind_param($stmt, "sssssssssss", $fname, $lname, $email, $pass_hash, $type, $city, $gender, $age, $new_img_name, $phone , $title);
                         mysqli_stmt_execute($stmt);
                         echo "<div class='alert alert-success'>" . 'You are registered successfully.' . "</div>";
                     } else {
