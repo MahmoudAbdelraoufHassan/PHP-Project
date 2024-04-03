@@ -75,8 +75,8 @@ if (isset($_SESSION['id'])) {
                 <div class="dropdown">
                     <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#"
                         id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-                        <img src="upload/<?= $user['picture'] == null ? "user.png": $user['picture'] ?>" class="rounded-circle" height="35"
-                            alt="Black and White Portrait of a Man" loading="lazy" />
+                        <img src="upload/<?= $user['picture'] == null ? "user.png" : $user['picture'] ?>"
+                            class="rounded-circle" height="35" alt="Black and White Portrait of a Man" loading="lazy" />
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end rounded-0 effect"
                         aria-labelledby="navbarDropdownMenuAvatar">
@@ -112,7 +112,7 @@ if (isset($_SESSION['id'])) {
                 </div>
                 <div class="filters">
                     <h4>Search Jobs</h4>
-                    <div class="search">
+                    <div class="search d-flex">
                         <input type="text" class="input" placeholder="Search for Jobs" id="input-search">
                         <button>
                             <img src="./search.png" alt="" class="btn-search">
@@ -131,80 +131,44 @@ if (isset($_SESSION['id'])) {
         </div>
     </section>
     <footer class="text-center bg-dark">
-  <!-- Grid container -->
-  <div class="container pt-4">
-    <!-- Section: Social media -->
-    <div class="mb-4">
-      <!-- Facebook -->
-      <a
-        data-mdb-ripple-init
-        class="btn-floating btn-lg text-white m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-facebook-f"></i
-      ></a>
+        <!-- Grid container -->
+        <div class="container pt-4">
+            <!-- Section: Social media -->
+            <div class="mb-4">
+                <!-- Facebook -->
+                <a data-mdb-ripple-init class="btn-floating btn-lg text-white m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
 
-      <!-- Twitter -->
-      <a
-        data-mdb-ripple-init
-        class="btn-floating btn-lg text-white m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-twitter"></i
-      ></a>
+                <!-- Twitter -->
+                <a data-mdb-ripple-init class="btn-floating btn-lg text-white m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
 
-      <!-- Google -->
-      <a
-        data-mdb-ripple-init
-        class="btn-floating btn-lg text-white m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-google"></i
-      ></a>
+                <!-- Google -->
+                <a data-mdb-ripple-init class="btn-floating btn-lg text-white m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
 
-      <!-- Instagram -->
-      <a
-        data-mdb-ripple-init
-        class="btn-floating btn-lg text-white m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-instagram"></i
-      ></a>
+                <!-- Instagram -->
+                <a data-mdb-ripple-init class="btn-floating btn-lg text-white m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
 
-      <!-- Linkedin -->
-      <a
-        data-mdb-ripple-init
-        class="btn-floating btn-lg text-white m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-linkedin"></i
-      ></a>
-      <!-- Github -->
-      <a
-        data-mdb-ripple-init
-        class="btn-floating btn-lg text-white m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-github"></i
-      ></a>
-    </div>
-    <!-- Section: Social media -->
-  </div>
-  <!-- Grid container -->
+                <!-- Linkedin -->
+                <a data-mdb-ripple-init class="btn-floating btn-lg text-white m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+                <!-- Github -->
+                <a data-mdb-ripple-init class="btn-floating btn-lg text-white m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+            </div>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
 
-  <!-- Copyright -->
-  <div class="text-center p-3 text-light" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2020 Copyright:
-    <a class="text-primary" href="">ITI</a>
-  </div>
-  <!-- Copyright -->
-</footer>
+        <!-- Copyright -->
+        <div class="text-center p-3 text-light" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2020 Copyright:
+            <a class="text-primary" href="">ITI</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>

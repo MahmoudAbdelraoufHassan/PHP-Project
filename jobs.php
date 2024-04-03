@@ -80,8 +80,8 @@ if (isset($_SESSION['id'])) {
                 <div class="dropdown">
                     <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow " href="#"
                         id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-                        <img src="upload/<?= $user['picture'] == null ? "user.png": $user['picture'] ?>" class="rounded-circle" height="35"
-                            alt="Black and White Portrait of a Man" loading="lazy" />
+                        <img src="upload/<?= $user['picture'] == null ? "user.png" : $user['picture'] ?>"
+                            class="rounded-circle" height="35" alt="Black and White Portrait of a Man" loading="lazy" />
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end rounded-0 effect"
                         aria-labelledby="navbarDropdownMenuAvatar">
@@ -117,7 +117,7 @@ if (isset($_SESSION['id'])) {
                 </div>
                 <div class="filters">
                     <h4>Search Jobs</h4>
-                    <div class="search">
+                    <div class="search d-flex justify-content-space-between" style="justify-content: space-between">
                         <input type="text" class="input" placeholder="Search for Jobs" id="input-search">
                         <button>
                             <img src="./search.png" alt="" class="btn-search">

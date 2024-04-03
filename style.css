@@ -520,5 +520,5 @@ h3.log::before{
     transition: 0.3s;
 }
 .search {
-    display: flex;
+    display: flex !important;
 }
